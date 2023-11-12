@@ -306,21 +306,57 @@
 
     <!-- footer design -->
 
-    <body>
-        <link rel="stylesheet" href="css/">
-        <div id="container">
-            <div class="container">
-                <h2>404</h2>
-                <h4>Opps! Page not found</h4>
-                <p>The page you were looking for doesn't exist. You may have mistyped the adress
-                or the page may have moved.</p>
-                <a href="#"></a>
-                <div class="btn-box btns">
-                    <a href="#" class="btn">Back</a>
-                 </div>
-            </div>
-        </div>
-    </body>
+
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Динамическое Имя Сайта</title>
+</head>
+<body>
+
+<script>
+    // Функция для установки динамического имени в зависимости от значения хэша
+    function setDynamicName() {
+        // Получаем значение хэша из URL
+        var hashValue = window.location.hash.substr(1); // убираем символ # из значения хэша
+
+        // Определяем динамическое имя в зависимости от значения хэша
+        var dynamicName;
+        switch (hashValue) {
+            case "about":
+                dynamicName = "RST - About";
+                break;
+
+            case "education":
+                dynamicName = "RST - Education";
+                break;
+
+            case "skills":
+                dynamicName = "RST - Skills";
+                break;
+                
+            case "contact":
+                dynamicName = "RST - Contact";
+                break;
+
+            default:
+                dynamicName = "RST";
+        }
+
+        // Устанавливаем динамическое имя в заголовке страницы
+        document.getElementById("pageTitle").innerHTML = dynamicName;
+    }
+
+    // Вызываем функцию при загрузке страницы и при изменении хэша
+    window.onload = setDynamicName;
+    window.onhashchange = setDynamicName;
+</script>
+
+</body>
+</html>
+
 
     <script src="js/script.js"></script>
 </body>
