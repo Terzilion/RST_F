@@ -234,14 +234,14 @@
     <section class="contact" id="contact">
         <h2 class="heading">Contact <span>US!</span><span class="animate scroll" style="--i:1;"></span></h2>
 
-        <form action="#">
+        <form action="/php//process_form.php" method="post">
             <div class="input-box">
                 <div class="input-field">
-                    <input type="text" placeholder="Full Name" required>
+                    <input type="text" placeholder="Full Name" name="name" required>
                     <span class="focus"></span>
                 </div>
                 <div class="input-field">
-                    <input type="text" placeholder="Email Address" required>
+                    <input type="text" placeholder="Email Address" name="email" required>
                     <span class="focus"></span>
                 </div>
 
@@ -250,7 +250,7 @@
 
                 <div class="input-box">
                     <div class="input-field">
-                        <input type="number" placeholder="Mobile Number" required>
+                        <input type="number" placeholder="Mobile Number" name="phone" required>
                         <span class="focus"></span>
                     </div>
                     <div class="input-field">
@@ -262,13 +262,13 @@
             </div>
 
             <div class="textarea-field">
-                <textarea name="" id="" cols="30" rows="10" placeholder="Your Message" required></textarea>
+                <textarea name="message" id="" cols="30" rows="10" placeholder="Your Message" required></textarea>
                 <span class="focus"></span>
 
                 <span class="animate scroll" style="--i:7;"></span>
             </div>
             <div class="btn-box btns">
-                <button type="submit" class="btn">Submit</button>
+                <button type="submit" class="btn" name="send">Submit</button>
 
                 <span class="animate scroll" style="--i:9;"></span>
             </div>
