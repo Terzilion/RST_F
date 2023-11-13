@@ -1,54 +1,40 @@
-<?php
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
+<?php 
 
+require_once('phpmailer/PHPMailerAutoload.php');
+$mail = new PHPMailer;
+$mail->CharSet = 'utf-8';
 
-if (isset($_POST["send"])) {
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $phone = $_POST["phone"];
-    $message = $_POST["message"];
+$name = $_POST['user_name'];
+$phone = $_POST['user_phone'];
+$email = $_POST['user_email'];
 
+//$mail->SMTPDebug = 3;                               // Enable verbose debug output
 
-    print "пример - это $email";
+$mail->isSMTP();                                      // Set mailer to use SMTP
+$mail->Host = 'smtp.gmail.ru';  																							// Specify main and backup SMTP servers
+$mail->SMTPAuth = true;                               // Enable SMTP authentication
+$mail->Username = 'rstsupr@gmail.com'; // Ваш логин от почты с которой будут отправляться письма
+$mail->Password = 'gwsw gsqz uild mdwm'; // Ваш пароль от почты с которой будут отправляться письма
+$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+$mail->Port = 465; // TCP port to connect to / этот порт может отличаться у других провайдеров
 
-    // Создаем экземпляр PHPMailer
-    $mail = new PHPMailer(true);
+$mail->setFrom('rstsupr@gmail.com'); // от кого будет уходить письмо?
+$mail->addAddress('terzilion@gmail.con');     // Кому будет уходить письмо 
+//$mail->addAddress('ellen@example.com');               // Name is optional
+//$mail->addReplyTo('info@example.com', 'Information');
+//$mail->addCC('cc@example.com');
+//$mail->addBCC('bcc@example.com');
+//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+$mail->isHTML(true);                                  // Set email format to HTML
 
-    try {
-        // Настройки сервера отправки почты
-        $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com'; // Замените на адрес вашего SMTP сервера
-        $mail->SMTPAuth   = true;
-        $mail->Username   = 'rstsupr@gmail.com'; // Замените на вашу почту
-        $mail->Password   = 'orbk wurn jrqa dfml'; // Замените на ваш пароль
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port       = 465;
-        $mail->isHTML(true);
+$mail->Subject = 'Заявка с тестового сайта';
+$mail->Body    = '' .$name . ' оставил заявку, его телефон ' .$phone. '<br>Почта этого пользователя: ' .$email;
+$mail->AltBody = '';
 
-        // Адрес отправителя
-        $mail->setFrom('rstsupr@gmail.com');
-
-        // Адрес получателя (адрес пользователя)
-        $mail->addAddress($email);
-
-        // Тема письма
-        $mail->Subject = 'Мы получили ваш запрос';
-
-        // Текст письма
-        $mail->Body = "Ghb";
-
-        // Отправляем письмо
-        $mail->send();
-
-        echo "Форма успешно отправлена!";
-    } catch (Exception $e) {
-        echo "Ошибка при отправке письма: {$mail->ErrorInfo}";
-    }
+if(!$mail->send()) {
+    echo 'Error';
 } else {
-    echo "Ошибка: форма не отправлена!";
+    header('location: thank-you.html');
 }
 ?>
