@@ -42,15 +42,9 @@ if (isset($_SERVER["REQUEST_METHOD"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = 'Мы получили ваш запрос';
-        $mail->Body    = 'Спасибо, $name, за отправку формы. Мы получили ваш запрос.\n\nИмя: $name\nEmail: $email\nНомер телефона: $phone\nСообщение: $message';
+        $mail->Body = 'Спасибо, $name, за отправку формы. Мы получили ваш запрос.<df>Имя: $name\nEmail: $email\nНомер телефона: $phone\nСообщение: $message';
     
         $mail->send();
-
-        $to_owner = "rstsupr@gmail.com";
-        $subject_owner = "Новая форма отправлена";
-        $message_owner = "Новая форма была отправлена.\n\nИмя: $name\nEmail: $email\nНомер телефона: $phone\nСообщение: $message";
-
-        mail($to_owner, $subject_owner, $message_owner);
 
         echo 'Message has been sent';
     } catch (Exception $e) {
